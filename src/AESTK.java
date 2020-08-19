@@ -1,4 +1,10 @@
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -6,7 +12,6 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Admin
@@ -16,6 +21,9 @@ public class AESTK extends javax.swing.JFrame {
     /**
      * Creates new form AESTK
      */
+    public static ArrayList<String> list_in = new ArrayList<>();
+    public static ArrayList<String> list_ened = new ArrayList<>();
+
     public AESTK() {
         initComponents();
         this.setTitle("AES Tool Kit");
@@ -51,6 +59,8 @@ public class AESTK extends javax.swing.JFrame {
         de = new javax.swing.JButton();
         bit = new javax.swing.JComboBox<>();
         filein = new javax.swing.JButton();
+        noti = new javax.swing.JLabel();
+        filename = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -155,6 +165,10 @@ public class AESTK extends javax.swing.JFrame {
             }
         });
 
+        noti.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+
+        filename.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -165,11 +179,11 @@ public class AESTK extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2))
-                    .addComponent(filein))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
+                    .addComponent(filein)
+                    .addComponent(filename, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(103, 103, 103)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -177,7 +191,7 @@ public class AESTK extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(bit, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(158, Short.MAX_VALUE))
+                                .addContainerGap(156, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(en)
                                 .addGap(18, 18, 18)
@@ -186,7 +200,9 @@ public class AESTK extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(noti, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -200,13 +216,17 @@ public class AESTK extends javax.swing.JFrame {
                     .addComponent(key)
                     .addComponent(filein, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addGap(37, 37, 37)
-                .addComponent(bit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filename, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(69, 69, 69)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(en, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(de, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(75, 75, 75)
+                        .addComponent(noti, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
@@ -238,34 +258,76 @@ public class AESTK extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enActionPerformed
-        // TODO add your handling code here:
-        AES aes = new AES();
-        String input = this.input.getText().trim();
-        String key = this.key.getText().trim();
-        String output = null;
-        if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
-            output = aes.encrypt(input, key);
-        } else {
-            output = aes.encrypt256(input, key);
+        BufferedWriter writer = null;
+        try {
+            // TODO add your handling code here:
+            AES aes = new AES();
+            String input = "";
+            if (list_in.size() > 0) {
+                for (String x : list_in) {
+                    input = input + x;
+                }
+            } else {
+                input = this.input.getText().trim();
+            }
+            String key = this.key.getText().trim();
+            String output = null;
+            if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
+                output = aes.encrypt(input, key);
+            } else {
+                output = aes.encrypt256(input, key);
+            }
+            this.output.setText(output);
+            writer = new BufferedWriter(new FileWriter("mahoa.aestk"));
+            writer.write(output);
+            writer.close();
+            this.noti.setText("File mã hóa mahoa.aestk đã được lưu");
+        } catch (IOException ex) {
+            Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException ex) {
+                Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        this.output.setText(output);
 
     }//GEN-LAST:event_enActionPerformed
 
     private void deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deActionPerformed
-        // TODO add your handling code here:
-        AES aes = new AES();
-        String input = this.input.getText().trim();
-        String key = this.key.getText().trim();
-        String output = null;
-        if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
-            output = aes.decrypt(input, key);
-        } else {
-            output = aes.decrypt256(input, key);
-        }
-        this.output.setText(output);
-        if(output == null){
-            JOptionPane.showMessageDialog(this, "Don't Decrypt");
+        BufferedWriter writer = null;
+        try {
+            // TODO add your handling code here:
+            AES aes = new AES();
+            String input = "";
+            if (list_ened.size() > 0) {
+                for (String x : list_ened) {
+                    input = input + x;
+                }
+            } else {
+                input = this.input.getText().trim();
+            }   String key = this.key.getText().trim();
+            String output = null;
+            if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
+                output = aes.decrypt(input, key);
+            } else {
+                output = aes.decrypt256(input, key);
+            }   this.output.setText(output);
+            writer = new BufferedWriter(new FileWriter("giaima.txt"));
+            writer.write(output);
+            writer.close();
+             this.noti.setText("File giải mã giaima.txt đã được lưu");
+            if (output == null) {
+                JOptionPane.showMessageDialog(this, "Don't Decrypt");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                writer.close();
+            } catch (IOException ex) {
+                Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }//GEN-LAST:event_deActionPerformed
@@ -316,6 +378,7 @@ public class AESTK extends javax.swing.JFrame {
     private javax.swing.JButton de;
     private javax.swing.JButton en;
     private javax.swing.JButton filein;
+    public static javax.swing.JLabel filename;
     private javax.swing.JTextArea input;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
@@ -330,6 +393,7 @@ public class AESTK extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField key;
+    private javax.swing.JLabel noti;
     private javax.swing.JTextArea output;
     // End of variables declaration//GEN-END:variables
 }

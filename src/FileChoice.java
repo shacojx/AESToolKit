@@ -1,9 +1,18 @@
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Admin
@@ -13,6 +22,8 @@ public class FileChoice extends javax.swing.JDialog {
     /**
      * Creates new form FileChoice
      */
+    public String fileName;
+
     public FileChoice(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -31,19 +42,25 @@ public class FileChoice extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jFileChooser1 = new javax.swing.JFileChooser();
+        FileIn = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        FileIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FileInActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFileChooser1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
+            .addComponent(FileIn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jFileChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+            .addComponent(FileIn, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -59,6 +76,43 @@ public class FileChoice extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void FileInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileInActionPerformed
+        // TODO add your handling code here:
+        FileReader fr = null;
+
+        try {
+            // TODO add your handling code here:
+            fileName = this.FileIn.getSelectedFile().toString();
+            File file = new File(fileName);
+            AESTK.filename.setText(fileName);
+            fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                //process the line
+                if (fileName.split("\\.")[1].equalsIgnoreCase("aestk")) {
+                    AESTK.list_ened.add(line);
+                } else {
+                    AESTK.list_in.add(line);
+                }
+
+            }
+
+            JOptionPane.showMessageDialog(this, "Load file input Done !!!");
+            this.setVisible(false);
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(this, "Load file input Failse !!!");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Load file input Failse !!!");
+        } finally {
+            try {
+                fr.close();
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Load file input Failse !!!");
+            }
+        }
+    }//GEN-LAST:event_FileInActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,7 +157,7 @@ public class FileChoice extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JFileChooser FileIn;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

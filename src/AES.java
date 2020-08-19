@@ -55,8 +55,8 @@ public class AES {
         return null;
     }
 
-    private static String secretKey = "fuckkkkkkkkk40uuuuuuuu!!!1";
-    private static String salt = "y000000oooo00000uuuuuuuuuuuuuuuuuuu!!!!";
+    private static String secretKey = "aesfuckmyyou!!!!";
+    private static String salt = "sjaesfuckmyyou!!!!";
 
     public String encrypt256(String strToEncrypt, String secret) {
         try {
