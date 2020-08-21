@@ -27,7 +27,7 @@ public class AESTK extends javax.swing.JFrame {
     public AESTK() {
         initComponents();
         this.setTitle("AES Tool Kit");
-        this.setResizable(false);
+//        this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -258,6 +258,7 @@ public class AESTK extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enActionPerformed
+        this.output.setText("");
         BufferedWriter writer = null;
         try {
             // TODO add your handling code here:
@@ -277,7 +278,10 @@ public class AESTK extends javax.swing.JFrame {
             } else {
                 output = aes.encrypt256(input, key);
             }
-            this.output.setText(output);
+            if(list_in.size() == 0){
+                this.output.setText(output);
+            }
+            
             writer = new BufferedWriter(new FileWriter("mahoa.aestk"));
             writer.write(output);
             writer.close();
@@ -295,6 +299,7 @@ public class AESTK extends javax.swing.JFrame {
     }//GEN-LAST:event_enActionPerformed
 
     private void deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deActionPerformed
+        this.output.setText("");
         BufferedWriter writer = null;
         try {
             // TODO add your handling code here:
@@ -306,13 +311,18 @@ public class AESTK extends javax.swing.JFrame {
                 }
             } else {
                 input = this.input.getText().trim();
-            }   String key = this.key.getText().trim();
+            }   
+            String key = this.key.getText().trim();
             String output = null;
             if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
                 output = aes.decrypt(input, key);
             } else {
                 output = aes.decrypt256(input, key);
-            }   this.output.setText(output);
+            }  
+            if(list_ened.size() == 0){
+                this.output.setText(output);
+            }
+            
             writer = new BufferedWriter(new FileWriter("giaima.txt"));
             writer.write(output);
             writer.close();
