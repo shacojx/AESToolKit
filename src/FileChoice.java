@@ -94,7 +94,7 @@ public class FileChoice extends javax.swing.JDialog {
                 if (fileName.split("\\.")[1].equalsIgnoreCase("aestk")) {
                     AESTK.list_ened.add(line);
                 } else {
-                    AESTK.list_in.add(line);
+                    AESTK.list_in.add(line+"\n");
                 }
 
             }

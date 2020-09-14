@@ -27,7 +27,7 @@ public class AESTK extends javax.swing.JFrame {
     public AESTK() {
         initComponents();
         this.setTitle("AES Tool Kit");
-//        this.setResizable(false);
+        this.setResizable(false);
         this.setLocationRelativeTo(null);
     }
 
@@ -45,7 +45,7 @@ public class AESTK extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        about = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -54,16 +54,18 @@ public class AESTK extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         output = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
-        key = new javax.swing.JTextField();
         en = new javax.swing.JButton();
         de = new javax.swing.JButton();
         bit = new javax.swing.JComboBox<>();
         filein = new javax.swing.JButton();
-        noti = new javax.swing.JLabel();
-        filename = new javax.swing.JLabel();
+        key = new javax.swing.JPasswordField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        filename = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        noti = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 0, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -76,8 +78,15 @@ public class AESTK extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eog.jpg"))); // NOI18N
         jLabel3.setText("eog");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel4.setText("Code by Shaco JX");
+        about.setBackground(new java.awt.Color(0, 0, 255));
+        about.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        about.setForeground(new java.awt.Color(255, 255, 255));
+        about.setText("About Us");
+        about.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aboutActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -90,9 +99,9 @@ public class AESTK extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(163, 163, 163)
+                .addComponent(about, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,12 +116,12 @@ public class AESTK extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(about, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 51));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Input");
@@ -120,13 +129,17 @@ public class AESTK extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Output");
 
+        input.setBackground(new java.awt.Color(0, 0, 0));
         input.setColumns(20);
+        input.setForeground(new java.awt.Color(0, 204, 0));
         input.setLineWrap(true);
         input.setRows(5);
         input.setWrapStyleWord(true);
         jScrollPane1.setViewportView(input);
 
+        output.setBackground(new java.awt.Color(0, 0, 0));
         output.setColumns(20);
+        output.setForeground(new java.awt.Color(0, 204, 0));
         output.setLineWrap(true);
         output.setRows(5);
         output.setWrapStyleWord(true);
@@ -157,7 +170,9 @@ public class AESTK extends javax.swing.JFrame {
         bit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "128 bit", "256 bit" }));
 
+        filein.setBackground(new java.awt.Color(0, 0, 255));
         filein.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        filein.setForeground(new java.awt.Color(255, 255, 255));
         filein.setText("File Input");
         filein.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,9 +180,27 @@ public class AESTK extends javax.swing.JFrame {
             }
         });
 
-        noti.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        key.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        filename.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        filename.setEditable(false);
+        filename.setBackground(new java.awt.Color(0, 0, 0));
+        filename.setColumns(20);
+        filename.setForeground(new java.awt.Color(0, 204, 0));
+        filename.setLineWrap(true);
+        filename.setRows(5);
+        filename.setText("File input");
+        filename.setWrapStyleWord(true);
+        jScrollPane3.setViewportView(filename);
+
+        noti.setEditable(false);
+        noti.setBackground(new java.awt.Color(0, 0, 0));
+        noti.setColumns(20);
+        noti.setForeground(new java.awt.Color(51, 255, 0));
+        noti.setLineWrap(true);
+        noti.setRows(5);
+        noti.setText("File output");
+        noti.setWrapStyleWord(true);
+        jScrollPane4.setViewportView(noti);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -183,60 +216,59 @@ public class AESTK extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                     .addComponent(jScrollPane2)
                     .addComponent(filein)
-                    .addComponent(filename, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(103, 103, 103)
+                    .addComponent(jScrollPane3))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(55, 55, 55)
+                        .addGap(103, 103, 103)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(158, 158, 158)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(bit, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(156, Short.MAX_VALUE))
+                                .addContainerGap(158, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(en)
-                                .addGap(18, 18, 18)
-                                .addComponent(de)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(noti, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(key, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(en)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(de)))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(filein, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                     .addComponent(key)
-                    .addComponent(filein, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filename, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(bit, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(en, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(de, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(75, 75, 75)
-                        .addComponent(noti, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(39, 39, 39)))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -250,8 +282,8 @@ public class AESTK extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -262,7 +294,7 @@ public class AESTK extends javax.swing.JFrame {
         BufferedWriter writer = null;
         try {
             // TODO add your handling code here:
-            AES aes = new AES();
+            Fuck fuck = new Fuck();
             String input = "";
             if (list_in.size() > 0) {
                 for (String x : list_in) {
@@ -274,18 +306,20 @@ public class AESTK extends javax.swing.JFrame {
             String key = this.key.getText().trim();
             String output = null;
             if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
-                output = aes.encrypt(input, key);
+                output = fuck.encode(input, key);
             } else {
-                output = aes.encrypt256(input, key);
+                output = fuck.encode256(input, key);
             }
-            if(list_in.size() == 0){
+            if (list_in.size() == 0) {
                 this.output.setText(output);
+            } else {
+                this.noti.setText("File mã hóa "+filename.getText().split("\\.")[0]+".aestk"+" đã được lưu");
             }
-            
-            writer = new BufferedWriter(new FileWriter("mahoa.aestk"));
+
+            writer = new BufferedWriter(new FileWriter(filename.getText().split("\\.")[0]+".aestk"));
             writer.write(output);
             writer.close();
-            this.noti.setText("File mã hóa mahoa.aestk đã được lưu");
+
         } catch (IOException ex) {
             Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -303,7 +337,7 @@ public class AESTK extends javax.swing.JFrame {
         BufferedWriter writer = null;
         try {
             // TODO add your handling code here:
-            AES aes = new AES();
+            Fuck fuck = new Fuck();
             String input = "";
             if (list_ened.size() > 0) {
                 for (String x : list_ened) {
@@ -311,22 +345,24 @@ public class AESTK extends javax.swing.JFrame {
                 }
             } else {
                 input = this.input.getText().trim();
-            }   
+            }
             String key = this.key.getText().trim();
             String output = null;
             if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
-                output = aes.decrypt(input, key);
+                output = fuck.decode(input, key);
             } else {
-                output = aes.decrypt256(input, key);
-            }  
-            if(list_ened.size() == 0){
-                this.output.setText(output);
+                output = fuck.decode256(input, key);
             }
-            
-            writer = new BufferedWriter(new FileWriter("giaima.txt"));
+            if (list_ened.size() == 0) {
+                this.output.setText(output);
+            } else {
+                this.noti.setText("File giải mã "+filename.getText().split("\\.")[0]+".txt"+" đã được lưu");
+            }
+
+            writer = new BufferedWriter(new FileWriter(filename.getText().split("\\.")[0]+".txt"));
             writer.write(output);
             writer.close();
-             this.noti.setText("File giải mã giaima.txt đã được lưu");
+
             if (output == null) {
                 JOptionPane.showMessageDialog(this, "Don't Decrypt");
             }
@@ -347,6 +383,12 @@ public class AESTK extends javax.swing.JFrame {
         FileChoice fc = new FileChoice(this, true);
         fc.setVisible(true);
     }//GEN-LAST:event_fileinActionPerformed
+
+    private void aboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutActionPerformed
+        // TODO add your handling code here:
+        About ab = new About(this, true);
+        ab.setVisible(true);
+    }//GEN-LAST:event_aboutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,17 +426,17 @@ public class AESTK extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton about;
     private javax.swing.JComboBox<String> bit;
     private javax.swing.JButton de;
     private javax.swing.JButton en;
     private javax.swing.JButton filein;
-    public static javax.swing.JLabel filename;
+    public static javax.swing.JTextArea filename;
     private javax.swing.JTextArea input;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -402,8 +444,10 @@ public class AESTK extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField key;
-    private javax.swing.JLabel noti;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JPasswordField key;
+    public static javax.swing.JTextArea noti;
     private javax.swing.JTextArea output;
     // End of variables declaration//GEN-END:variables
 }
