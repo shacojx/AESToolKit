@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /*
@@ -23,6 +24,7 @@ public class FileChoice extends javax.swing.JDialog {
      * Creates new form FileChoice
      */
     public String fileName;
+    
 
     public FileChoice(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -80,6 +82,8 @@ public class FileChoice extends javax.swing.JDialog {
     private void FileInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileInActionPerformed
         // TODO add your handling code here:
         FileReader fr = null;
+        AESTK.list_in = new ArrayList<>();
+        AESTK.list_ened = new ArrayList<>();
 
         try {
             // TODO add your handling code here:

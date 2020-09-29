@@ -21,8 +21,8 @@ public class AESTK extends javax.swing.JFrame {
     /**
      * Creates new form AESTK
      */
-    public static ArrayList<String> list_in = new ArrayList<>();
-    public static ArrayList<String> list_ened = new ArrayList<>();
+    public static ArrayList<String> list_in;
+    public static ArrayList<String> list_ened;
 
     public AESTK() {
         initComponents();
