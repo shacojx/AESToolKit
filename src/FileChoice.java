@@ -24,7 +24,6 @@ public class FileChoice extends javax.swing.JDialog {
      * Creates new form FileChoice
      */
     public String fileName;
-    
 
     public FileChoice(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -93,18 +92,22 @@ public class FileChoice extends javax.swing.JDialog {
             fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
             String line;
-            while ((line = br.readLine()) != null) {
-                //process the line
-                if (fileName.split("\\.")[1].equalsIgnoreCase("aestk")) {
+            if (fileName.split("\\.")[1].equalsIgnoreCase("aestk")) {
+                while ((line = br.readLine()) != null) {
                     AESTK.list_ened.add(line);
-                } else {
-                    AESTK.list_in.add(line+"\n");
                 }
-
+                JOptionPane.showMessageDialog(this, "Load file thành công. Hãy Decryption !!!");
+                this.setVisible(false);
+            } else if (fileName.split("\\.")[1].equalsIgnoreCase("txt")) {
+                while ((line = br.readLine()) != null) {
+                    AESTK.list_in.add(line + "\n");
+                }
+                JOptionPane.showMessageDialog(this, "Load file thành công. Hãy Encryption !!!");
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(this, "Hệ thống chỉ nhận file txt và aestk");
             }
 
-            JOptionPane.showMessageDialog(this, "Load file input Done !!!");
-            this.setVisible(false);
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(this, "Load file input Failse !!!");
         } catch (IOException ex) {

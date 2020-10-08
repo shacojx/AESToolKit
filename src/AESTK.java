@@ -290,91 +290,101 @@ public class AESTK extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enActionPerformed
-        this.output.setText("");
-        BufferedWriter writer = null;
-        try {
-            // TODO add your handling code here:
-            Fuck fuck = new Fuck();
-            String input = "";
-            if (list_in.size() > 0) {
-                for (String x : list_in) {
-                    input = input + x;
-                }
-            } else {
-                input = this.input.getText().trim();
-            }
-            String key = this.key.getText().trim();
-            String output = null;
-            if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
-                output = fuck.encode(input, key);
-            } else {
-                output = fuck.encode256(input, key);
-            }
-            if (list_in.size() == 0) {
-                this.output.setText(output);
-            } else {
-                this.noti.setText("File mã hóa "+filename.getText().split("\\.")[0]+".aestk"+" đã được lưu");
-            }
-
-            writer = new BufferedWriter(new FileWriter(filename.getText().split("\\.")[0]+".aestk"));
-            writer.write(output);
-            writer.close();
-
-        } catch (IOException ex) {
-            Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        if (filename.getText().split("\\.")[1].equalsIgnoreCase("txt")) {
+            this.output.setText("");
+            BufferedWriter writer = null;
             try {
+                // TODO add your handling code here:
+                Fuck fuck = new Fuck();
+                String input = "";
+                if (list_in.size() > 0) {
+                    for (String x : list_in) {
+                        input = input + x;
+                    }
+                } else {
+                    input = this.input.getText().trim();
+                }
+                String key = this.key.getText().trim();
+                String output = null;
+                if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
+                    output = fuck.encode(input, key);
+                } else {
+                    output = fuck.encode256(input, key);
+                }
+                if (list_in.size() == 0) {
+                    this.output.setText(output);
+                } else {
+                    this.noti.setText("File mã hóa " + filename.getText().split("\\.")[0] + ".aestk" + " đã được lưu");
+                }
+
+                writer = new BufferedWriter(new FileWriter(filename.getText().split("\\.")[0] + ".aestk"));
+                writer.write(output);
                 writer.close();
+
             } catch (IOException ex) {
                 Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    writer.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chỉ có file txt mới sử dụng được chức năng này.");
         }
+
 
     }//GEN-LAST:event_enActionPerformed
 
     private void deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deActionPerformed
-        this.output.setText("");
-        BufferedWriter writer = null;
-        try {
-            // TODO add your handling code here:
-            Fuck fuck = new Fuck();
-            String input = "";
-            if (list_ened.size() > 0) {
-                for (String x : list_ened) {
-                    input = input + x;
-                }
-            } else {
-                input = this.input.getText().trim();
-            }
-            String key = this.key.getText().trim();
-            String output = null;
-            if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
-                output = fuck.decode(input, key);
-            } else {
-                output = fuck.decode256(input, key);
-            }
-            if (list_ened.size() == 0) {
-                this.output.setText(output);
-            } else {
-                this.noti.setText("File giải mã "+filename.getText().split("\\.")[0]+".txt"+" đã được lưu");
-            }
-
-            writer = new BufferedWriter(new FileWriter(filename.getText().split("\\.")[0]+".txt"));
-            writer.write(output);
-            writer.close();
-
-            if (output == null) {
-                JOptionPane.showMessageDialog(this, "Don't Decrypt");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
+        if (filename.getText().split("\\.")[1].equalsIgnoreCase("aestk")) {
+            this.output.setText("");
+            BufferedWriter writer = null;
             try {
+                // TODO add your handling code here:
+                Fuck fuck = new Fuck();
+                String input = "";
+                if (list_ened.size() > 0) {
+                    for (String x : list_ened) {
+                        input = input + x;
+                    }
+                } else {
+                    input = this.input.getText().trim();
+                }
+                String key = this.key.getText().trim();
+                String output = null;
+                if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
+                    output = fuck.decode(input, key);
+                } else {
+                    output = fuck.decode256(input, key);
+                }
+                if (list_ened.size() == 0) {
+                    this.output.setText(output);
+                } else {
+                    this.noti.setText("File giải mã " + filename.getText().split("\\.")[0] + ".txt" + " đã được lưu");
+                }
+
+                writer = new BufferedWriter(new FileWriter(filename.getText().split("\\.")[0] + ".txt"));
+                writer.write(output);
                 writer.close();
+
+                if (output == null) {
+                    JOptionPane.showMessageDialog(this, "Don't Decrypt");
+                }
             } catch (IOException ex) {
                 Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    writer.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chỉ có file aestk mới thực hiện được chức năng này.");
         }
+
 
     }//GEN-LAST:event_deActionPerformed
 
