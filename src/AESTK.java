@@ -21,8 +21,8 @@ public class AESTK extends javax.swing.JFrame {
     /**
      * Creates new form AESTK
      */
-    public static ArrayList<String> list_in;
-    public static ArrayList<String> list_ened;
+    public static ArrayList<String> list_in = new ArrayList<>();
+    public static ArrayList<String> list_ened = new ArrayList<>();
 
     public AESTK() {
         initComponents();
@@ -46,6 +46,7 @@ public class AESTK extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         about = new javax.swing.JButton();
+        clear = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -88,6 +89,15 @@ public class AESTK extends javax.swing.JFrame {
             }
         });
 
+        clear.setBackground(new java.awt.Color(0, 204, 255));
+        clear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        clear.setText("Clear");
+        clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -99,9 +109,11 @@ public class AESTK extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(163, 163, 163)
+                .addGap(80, 80, 80)
+                .addComponent(clear)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(about, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,7 +129,9 @@ public class AESTK extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(59, 59, 59)
-                .addComponent(about, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(about, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(clear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -290,99 +304,78 @@ public class AESTK extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enActionPerformed
-        if (filename.getText().split("\\.")[1].equalsIgnoreCase("txt")) {
-            this.output.setText("");
-            BufferedWriter writer = null;
-            try {
-                // TODO add your handling code here:
-                Fuck fuck = new Fuck();
-                String input = "";
-                if (list_in.size() > 0) {
-                    for (String x : list_in) {
-                        input = input + x;
-                    }
-                } else {
-                    input = this.input.getText().trim();
-                }
-                String key = this.key.getText().trim();
-                String output = null;
-                if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
-                    output = fuck.encode(input, key);
-                } else {
-                    output = fuck.encode256(input, key);
-                }
-                if (list_in.size() == 0) {
-                    this.output.setText(output);
-                } else {
-                    this.noti.setText("File mã hóa " + filename.getText().split("\\.")[0] + ".aestk" + " đã được lưu");
-                }
 
+        this.output.setText("");
+        BufferedWriter writer = null;
+        try {
+            // TODO add your handling code here:
+            Fuck fuck = new Fuck();
+            String input = "";
+            if (list_in.size() > 0) {
+                for (String x : list_in) {
+                    input = input + x;
+                }
+            } else {
+                input = this.input.getText().trim();
+            }
+            String key = this.key.getText().trim();
+            String output = null;
+            if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
+                output = fuck.encode(input, key);
+            } else {
+                output = fuck.encode256(input, key);
+            }
+            if (list_in.size() == 0) {
+                this.output.setText(output);
+            } else {
+                this.noti.setText("File mã hóa " + filename.getText().split("\\.")[0] + ".aestk" + " đã được lưu");
                 writer = new BufferedWriter(new FileWriter(filename.getText().split("\\.")[0] + ".aestk"));
                 writer.write(output);
                 writer.close();
-
-            } catch (IOException ex) {
-                Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    writer.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Chỉ có file txt mới sử dụng được chức năng này.");
-        }
 
+        } catch (IOException ex) {
+            Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_enActionPerformed
 
     private void deActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deActionPerformed
-        if (filename.getText().split("\\.")[1].equalsIgnoreCase("aestk")) {
-            this.output.setText("");
-            BufferedWriter writer = null;
-            try {
-                // TODO add your handling code here:
-                Fuck fuck = new Fuck();
-                String input = "";
-                if (list_ened.size() > 0) {
-                    for (String x : list_ened) {
-                        input = input + x;
-                    }
-                } else {
-                    input = this.input.getText().trim();
-                }
-                String key = this.key.getText().trim();
-                String output = null;
-                if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
-                    output = fuck.decode(input, key);
-                } else {
-                    output = fuck.decode256(input, key);
-                }
-                if (list_ened.size() == 0) {
-                    this.output.setText(output);
-                } else {
-                    this.noti.setText("File giải mã " + filename.getText().split("\\.")[0] + ".txt" + " đã được lưu");
-                }
 
+        this.output.setText("");
+        BufferedWriter writer = null;
+        try {
+            // TODO add your handling code here:
+            Fuck fuck = new Fuck();
+            String input = "";
+            if (list_ened.size() > 0) {
+                for (String x : list_ened) {
+                    input = input + x;
+                }
+            } else {
+                input = this.input.getText().trim();
+            }
+            String key = this.key.getText().trim();
+            String output = null;
+            if (this.bit.getSelectedItem().toString().equalsIgnoreCase("128 bit")) {
+                output = fuck.decode(input, key);
+            } else {
+                output = fuck.decode256(input, key);
+            }
+            if (list_ened.size() == 0) {
+                this.output.setText(output);
+            } else {
+                this.noti.setText("File giải mã " + filename.getText().split("\\.")[0] + ".txt" + " đã được lưu");
                 writer = new BufferedWriter(new FileWriter(filename.getText().split("\\.")[0] + ".txt"));
                 writer.write(output);
                 writer.close();
-
-                if (output == null) {
-                    JOptionPane.showMessageDialog(this, "Don't Decrypt");
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    writer.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Chỉ có file aestk mới thực hiện được chức năng này.");
+
+            if (output == null) {
+                JOptionPane.showMessageDialog(this, "Don't Decrypt");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(AESTK.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -399,6 +392,15 @@ public class AESTK extends javax.swing.JFrame {
         About ab = new About(this, true);
         ab.setVisible(true);
     }//GEN-LAST:event_aboutActionPerformed
+
+    private void clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearActionPerformed
+        // TODO add your handling code here:
+        this.input.setText("");
+        this.output.setText("");
+        filename.setText("File input");
+        noti.setText("File output");
+        this.key.setText("");
+    }//GEN-LAST:event_clearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -438,6 +440,7 @@ public class AESTK extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton about;
     private javax.swing.JComboBox<String> bit;
+    private javax.swing.JButton clear;
     private javax.swing.JButton de;
     private javax.swing.JButton en;
     private javax.swing.JButton filein;
