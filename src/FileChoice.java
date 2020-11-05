@@ -80,45 +80,52 @@ public class FileChoice extends javax.swing.JDialog {
 
     private void FileInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileInActionPerformed
         // TODO add your handling code here:
-        FileReader fr = null;
-        AESTK.list_in = new ArrayList<>();
-        AESTK.list_ened = new ArrayList<>();
+        if (evt.getActionCommand().equals(javax.swing.JFileChooser.APPROVE_SELECTION)) {
+            System.out.println("approve selection");
+            FileReader fr = null;
+            AESTK.list_in = new ArrayList<>();
+            AESTK.list_ened = new ArrayList<>();
 
-        try {
-            // TODO add your handling code here:
-            fileName = this.FileIn.getSelectedFile().toString();
-            File file = new File(fileName);
-            AESTK.filename.setText(fileName);
-            fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
-            String line;
-            if (fileName.split("\\.")[1].equalsIgnoreCase("aestk")) {
-                while ((line = br.readLine()) != null) {
-                    AESTK.list_ened.add(line);
-                }
-                JOptionPane.showMessageDialog(this, "Load file thành công. Hãy Decryption !!!");
-                this.setVisible(false);
-            } else if (fileName.split("\\.")[1].equalsIgnoreCase("txt")) {
-                while ((line = br.readLine()) != null) {
-                    AESTK.list_in.add(line + "\n");
-                }
-                JOptionPane.showMessageDialog(this, "Load file thành công. Hãy Encryption !!!");
-                this.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Hệ thống chỉ nhận file txt và aestk");
-            }
-
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(this, "Load file input Failse !!!");
-        } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "Load file input Failse !!!");
-        } finally {
             try {
-                fr.close();
+                // TODO add your handling code here:
+                fileName = this.FileIn.getSelectedFile().toString();
+                File file = new File(fileName);
+                AESTK.filename.setText(fileName);
+                fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
+                String line;
+                if (fileName.split("\\.")[1].equalsIgnoreCase("aestk")) {
+                    while ((line = br.readLine()) != null) {
+                        AESTK.list_ened.add(line);
+                    }
+                    JOptionPane.showMessageDialog(this, "Load file thành công. Hãy Decryption !!!");
+                    this.setVisible(false);
+                } else if (fileName.split("\\.")[1].equalsIgnoreCase("txt")) {
+                    while ((line = br.readLine()) != null) {
+                        AESTK.list_in.add(line + "\n");
+                    }
+                    JOptionPane.showMessageDialog(this, "Load file thành công. Hãy Encryption !!!");
+                    this.setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Hệ thống chỉ nhận file txt và aestk");
+                }
+
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(this, "Load file input Failse !!!");
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(this, "Load file input Failse !!!");
+            } finally {
+                try {
+                    fr.close();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this, "Load file input Failse !!!");
+                }
             }
+        } else if (evt.getActionCommand().equals(javax.swing.JFileChooser.CANCEL_SELECTION)) {
+            System.out.println("cancel selection");
+            this.setVisible(false);
         }
+
     }//GEN-LAST:event_FileInActionPerformed
 
     /**
