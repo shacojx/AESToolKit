@@ -397,8 +397,8 @@ public class AESTK extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.input.setText("");
         this.output.setText("");
-        filename.setText("File input");
-        noti.setText("File output");
+        filename.setText("Encrypt and decrypt text with AES algorithm");
+        noti.setText("Result of encryption and decryption");
         this.key.setText("");
     }//GEN-LAST:event_clearActionPerformed
 
